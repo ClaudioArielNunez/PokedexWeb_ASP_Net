@@ -20,38 +20,38 @@
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
             </div>
             <div class="mb-3">
-                <label for="txtTipo" class="form-label">Tipo:</label>
-                <asp:DropDownList ID="txtTipo" CssClass="form-select" runat="server"></asp:DropDownList>
+                <label for="ddlTipo" class="form-label">Tipo:</label>
+                <asp:DropDownList ID="ddlTipo" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
             <div class="mb-3">
-                <label for="txtDebilidad" class="form-label">Debilidad:</label>
-                <asp:DropDownList ID="txtDebilidad" CssClass="form-select" runat="server"></asp:DropDownList>
+                <label for="ddlDebilidad" class="form-label">Debilidad:</label>
+                <asp:DropDownList ID="ddlDebilidad" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
             <div class="mb-3">
-                <asp:Button Text="Aceptar" ID="btnAceptar" CssClass=" btn btn-primary" runat="server" />
+                <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass=" btn btn-primary" runat="server" />
                 <a href="Default.aspx" class="ms-3 text-decoration-none">Cancelar</a>
             </div>
         </div>
         <%----- 2 columna---%>
         <div class="col-6">
             <div class="mb-3">
-                <%--script manager--%>
-                <asp:ScriptManager ID="scrManager" runat="server" />
-                <%--update panel--%>
-                <asp:UpdatePanel runat="server">
-                    <ContentTemplate>
-                        <%--contenido q usa update panel--%>
-                        <label for="txtDescripcion" class="form-label">Descripción:</label>
-                        <asp:TextBox ID="txtImagen"  CssClass="form-control" TextMode="MultiLine" runat="server" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="txtUrlImagen" class="form-label">UrlImagen:</label>
-                            <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" CssClass="form-control" runat="server" />
-                        </div>
-                        <asp:Image ImageUrl="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg" runat="server" 
-                                    ID="imgPokemon" Width="60%" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                <label for="txtDescripcion" class="form-label">Descripción:</label>
+                <asp:TextBox ID="txtDescripcion" CssClass="form-control" TextMode="MultiLine" runat="server" />
             </div>
+            <%--script manager--%>
+            <asp:ScriptManager ID="scrManager" runat="server" />
+            <%--update panel--%>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <%--contenido q usa update panel--%>
+                    <div class="mb-3">
+                        <label for="txtUrlImagen" class="form-label">UrlImagen:</label>
+                        <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" CssClass="form-control" runat="server" />
+                    </div>
+                    <asp:Image ImageUrl="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg" runat="server"
+                        ID="imgPokemon" Width="60%" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
     </div>
 </asp:Content>
