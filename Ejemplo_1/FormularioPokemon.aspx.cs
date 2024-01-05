@@ -14,10 +14,11 @@ namespace Ejemplo_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtId.Enabled = false; //Esta prop no se podra editar
+            txtId.Enabled = false; //Esta prop es solo lectura
 
             try
             {
+                //Configuracion inicial
                 if(!IsPostBack)
                 {
                     ElementoNegocio negocio = new ElementoNegocio();
@@ -32,7 +33,27 @@ namespace Ejemplo_1
                     ddlDebilidad.DataTextField = "Descripcion";
                     ddlDebilidad.DataValueField = "Id";
                     ddlDebilidad.DataBind();
-                }                
+                }
+                //Configuracion si modificamos con id por parametro
+                if (Request.QueryString["id"] != null && !IsPostBack) //evitamos el postback, ya q se pisan los valores 
+                {                                                    //que modificamos con los datos antiguos en el PageLoad
+                    PokemonNegocio negocio = new PokemonNegocio();
+                    List<Pokemon>lista = negocio.listar(Request.QueryString["id"].ToString());
+                    Pokemon seleccionado = lista[0]; //la lista me trae solo un elemento
+
+                    //Precargamos datos
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtNumero.Text = seleccionado.Numero.ToString();
+                    txtDescripcion.Text = seleccionado.Descripcion.ToString();
+
+                    ddlTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
+                    ddlDebilidad.SelectedValue = seleccionado.Debilidad.Id.ToString();
+                    //la imagen se trata distinto
+                    txtUrlImagen.Text = seleccionado.UrlImagen.ToString();
+                    //imgPokemon.ImageUrl = seleccionado.UrlImagen.ToString();
+                    //txtUrlImagen_TextChanged(sender, e);
+
+                }
             }
             catch (Exception ex)
             {
@@ -57,7 +78,16 @@ namespace Ejemplo_1
                 nuevo.Debilidad = new Elemento();
                 nuevo.Debilidad.Id = int.Parse(ddlDebilidad.SelectedValue);
 
-                negocio.agregarConSP(nuevo);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.modificarConSp(nuevo);
+                }
+                else
+                {
+                    negocio.agregarConSP(nuevo);                   
+                }
+
                 Response.Redirect("PokemonLista.aspx", false);
             }
             catch (Exception ex)

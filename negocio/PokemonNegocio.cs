@@ -11,7 +11,7 @@ namespace negocio
 {
     public class PokemonNegocio
     {
-        public List<Pokemon> listar()
+        public List<Pokemon> listar(string id = "") //Reutilizazmos este metodo, ponemos un parametro por omision
         {
             List<Pokemon> lista = new List<Pokemon>();
             SqlConnection conexion = new SqlConnection();
@@ -22,7 +22,13 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion AS TIPO, D.Descripcion AS DEBILIDAD, P.IdTipo, P.IdDebilidad, P.Id  FROM POKEMONS P , ELEMENTOS E, ELEMENTOS D WHERE P.IdTipo = E.Id AND P.IdDebilidad = D.Id AND P.Activo = 1";
+                comando.CommandText = "SELECT Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion AS TIPO, D.Descripcion AS DEBILIDAD, P.IdTipo, P.IdDebilidad, P.Id  FROM POKEMONS P , ELEMENTOS E, ELEMENTOS D WHERE P.IdTipo = E.Id AND P.IdDebilidad = D.Id AND P.Activo = 1 ";
+                if(id != "")
+                {
+                    //si se envio un parametro agregamos a la consulta ese id
+                    comando.CommandText += " and P.Id = " + id; 
+                }
+                
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -131,6 +137,35 @@ namespace negocio
             {
                 datos.cerrarConeccion();
             }
+        }
+
+        public void modificarConSp(Pokemon nuevo)
+        {
+            //copiamos metodo modificar
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearProcedimiento("storedModificarPokemon");
+                datos.setearParametro("@numero", nuevo.Numero);
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@descripcion", nuevo.Descripcion);
+                datos.setearParametro("@urlImagen", nuevo.UrlImagen);
+                datos.setearParametro("@idTipo", nuevo.Tipo.Id);
+                datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
+                datos.setearParametro("@id", nuevo.Id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConeccion();
+            }
+
         }
         public void agregar(Pokemon nuevo)
         {
@@ -302,5 +337,7 @@ namespace negocio
                 throw ex;
             }
         }
+
+        
     }
 }
