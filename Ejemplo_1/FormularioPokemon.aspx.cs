@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using negocio;
 using dominio;
 using System.ComponentModel.Design.Serialization;
+using System.Web.Configuration;
 
 namespace Ejemplo_1
 {
@@ -115,8 +116,8 @@ namespace Ejemplo_1
             {
                 if(chkConfirmarEliminacion.Checked)
                 {                                    
-                    //int id = int.Parse(Request.QueryString["id"]);
-                    int id = int.Parse(txtId.Text);
+                    
+                    int id = int.Parse(Request.QueryString["id"].ToString());
                     PokemonNegocio negocio = new PokemonNegocio(); 
                     negocio.eliminar(id);
                     Response.Redirect("PokemonLista.aspx");
@@ -126,6 +127,24 @@ namespace Ejemplo_1
             {
                 Session.Add("Error", ex);
             }
+        }
+        
+        protected void btnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(Request.QueryString["id"]);
+                PokemonNegocio negocio = new PokemonNegocio();
+                negocio.eliminarLogico(id);
+                Response.Redirect("PokemonLista.aspx");
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+            }
+
         }
     }
 }
