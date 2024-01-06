@@ -116,8 +116,12 @@ namespace Ejemplo_1
             {
                 if(chkConfirmarEliminacion.Checked)
                 {                                    
+<<<<<<< HEAD
                     
                     int id = int.Parse(Request.QueryString["id"].ToString());
+=======
+                    int id = int.Parse(Request.QueryString["id"]);                    
+>>>>>>> 3bd7627ab25c67531c65e70c2577df8081405258
                     PokemonNegocio negocio = new PokemonNegocio(); 
                     negocio.eliminar(id);
                     Response.Redirect("PokemonLista.aspx");
