@@ -12,14 +12,16 @@ namespace Ejemplo_1
 {
     public partial class FormularioPokemon : System.Web.UI.Page
     {
+        //prop para el check box
+        public bool confirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false; //Esta prop es solo lectura
-
+            confirmaEliminacion = false;
             try
             {
                 //Configuracion inicial
-                if(!IsPostBack)
+                if (!IsPostBack)
                 {
                     ElementoNegocio negocio = new ElementoNegocio();
                     List<Elemento> lista = negocio.listar();
@@ -38,7 +40,7 @@ namespace Ejemplo_1
                 if (Request.QueryString["id"] != null && !IsPostBack) //evitamos el postback, ya q se pisan los valores 
                 {                                                    //que modificamos con los datos antiguos en el PageLoad
                     PokemonNegocio negocio = new PokemonNegocio();
-                    List<Pokemon>lista = negocio.listar(Request.QueryString["id"].ToString());
+                    List<Pokemon> lista = negocio.listar(Request.QueryString["id"].ToString());
                     Pokemon seleccionado = lista[0]; //la lista me trae solo un elemento
 
                     //Precargamos datos
@@ -80,12 +82,12 @@ namespace Ejemplo_1
 
                 if (Request.QueryString["id"] != null)
                 {
-                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    nuevo.Id = int.Parse(Request.QueryString["id"]); //necesito el id en este caso 
                     negocio.modificarConSp(nuevo);
                 }
                 else
                 {
-                    negocio.agregarConSP(nuevo);                   
+                    negocio.agregarConSP(nuevo);
                 }
 
                 Response.Redirect("PokemonLista.aspx", false);
@@ -93,7 +95,7 @@ namespace Ejemplo_1
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw ;
+                throw;
             }
         }
 
@@ -102,5 +104,28 @@ namespace Ejemplo_1
             imgPokemon.ImageUrl = txtUrlImagen.Text;
         }
 
+        protected void bbtnEliminar_Click(object sender, EventArgs e)
+        {
+            confirmaEliminacion = true;
+        }
+
+        protected void btnConfirmaEliminacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(chkConfirmarEliminacion.Checked)
+                {                                    
+                    //int id = int.Parse(Request.QueryString["id"]);
+                    int id = int.Parse(txtId.Text);
+                    PokemonNegocio negocio = new PokemonNegocio(); 
+                    negocio.eliminar(id);
+                    Response.Redirect("PokemonLista.aspx");
+                }
+            }
+            catch (Exception ex) 
+            {
+                Session.Add("Error", ex);
+            }
+        }
     }
 }
