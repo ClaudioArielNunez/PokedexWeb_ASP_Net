@@ -14,11 +14,13 @@ namespace Ejemplo_1
     public partial class FormularioPokemon : System.Web.UI.Page
     {
         //prop para el check box
+        
         public bool confirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false; //Esta prop es solo lectura
             confirmaEliminacion = false;
+            
             try
             {
                 //Configuracion inicial
@@ -44,6 +46,9 @@ namespace Ejemplo_1
                     List<Pokemon> lista = negocio.listar(Request.QueryString["id"].ToString());
                     Pokemon seleccionado = lista[0]; //la lista me trae solo un elemento
 
+                    //Guardamos en Session 
+                    Session.Add("pokeSeleccionado", seleccionado);
+
                     //Precargamos datos
                     txtNombre.Text = seleccionado.Nombre;
                     txtNumero.Text = seleccionado.Numero.ToString();
@@ -53,15 +58,21 @@ namespace Ejemplo_1
                     ddlDebilidad.SelectedValue = seleccionado.Debilidad.Id.ToString();
                     //la imagen se trata distinto
                     txtUrlImagen.Text = seleccionado.UrlImagen.ToString();
-                    //imgPokemon.ImageUrl = seleccionado.UrlImagen.ToString();
+                    imgPokemon.ImageUrl = txtUrlImagen.Text;
                     //txtUrlImagen_TextChanged(sender, e);
+
+                    //configuramos acciones del boton
+                    if (!seleccionado.Activo)
+                    {
+                        
+                        btnDesactivar.Text = "Activar";
+                    }
 
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex); //Agregamos a Session, para usarlo mas adelante
-                throw;
+                Session.Add("error", ex); //Agregamos a Session, para usarlo mas adelante                
             }
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -115,15 +126,17 @@ namespace Ejemplo_1
             try
             {
                 if(chkConfirmarEliminacion.Checked)
-                {                                    
-<<<<<<< HEAD
-                    
-                    int id = int.Parse(Request.QueryString["id"].ToString());
-=======
-                    int id = int.Parse(Request.QueryString["id"]);                    
->>>>>>> 3bd7627ab25c67531c65e70c2577df8081405258
-                    PokemonNegocio negocio = new PokemonNegocio(); 
-                    negocio.eliminar(id);
+                {                                   
+
+                    PokemonNegocio negocio = new PokemonNegocio();
+                    //Como lo usabamos antes
+                    //int id = int.Parse(Request.QueryString["id"].ToString());                                    
+                    //negocio.eliminar(id);
+
+                    //usando Session
+                    Pokemon seleccionado = (Pokemon)Session["pokeSeleccionado"];
+                    negocio.eliminar(seleccionado.Id);
+
                     Response.Redirect("PokemonLista.aspx");
                 }
             }
@@ -137,9 +150,14 @@ namespace Ejemplo_1
         {
             try
             {
-                int id = int.Parse(Request.QueryString["id"]);
+                //Quiero mas q solo el id por eso guardo el pokemon q me traje con Session
+                Pokemon seleccionado = (Pokemon)Session["pokeSeleccionado"];
+
+                //int id = int.Parse(Request.QueryString["id"]);//Esta linea ya no la usamos
+
                 PokemonNegocio negocio = new PokemonNegocio();
-                negocio.eliminarLogico(id);
+                negocio.eliminarLogico(seleccionado.Id, !seleccionado.Activo);
+                //En la linea de arriba, si queremos reactivar, necesitamos enviar el estado opuesto por eso !
                 Response.Redirect("PokemonLista.aspx");
 
             }

@@ -13,7 +13,7 @@ namespace Ejemplo_1
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            dgvPokemon.DataSource = negocio.listarConSP();
+            dgvPokemon.DataSource = negocio.listarInactivosConSp();
             dgvPokemon.DataBind();
         }
 

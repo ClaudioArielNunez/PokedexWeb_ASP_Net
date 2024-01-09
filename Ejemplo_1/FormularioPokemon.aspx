@@ -30,7 +30,7 @@
             <div class="mb-3">
                 <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass=" btn btn-primary" runat="server" />
                 <a href="Default.aspx" class="ms-3 text-decoration-none">Cancelar</a>
-                <asp:Button OnClick="btnDesactivar_Click" cssClass="btn btn-warning" Text="Desactivar" ID="btnDesactivar" runat="server" />
+                <asp:Button OnClick="btnDesactivar_Click" cssClass="btn btn-warning" text="Desactivar" ID="btnDesactivar" runat="server" />
             </div>
         </div>
         <%----- 2 columna---%>
