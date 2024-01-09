@@ -4,6 +4,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2 class="my-3">Listado de Pokemons</h2>
+    <div class="row">
+        <div class="mb-4 col-4">
+            <label for="txtFiltro" class="form-label">Filtro por Nombre:</label>
+            <asp:TextBox  OnTextChanged="txtFiltro_TextChanged" AutoPostBack="true" ID="txtFiltro" cssClass="form-control" runat="server" />            
+        </div>
+    </div>
     <asp:GridView ID="dgvPokemon" DataKeyNames="Id" OnSelectedIndexChanged="dgvPokemon_SelectedIndexChanged" AutoGenerateColumns="false" cssClass="table" runat="server"
                    OnPageIndexChanging="dgvPokemon_PageIndexChanging" AllowPaging="true" PageSize="5">
         <Columns>

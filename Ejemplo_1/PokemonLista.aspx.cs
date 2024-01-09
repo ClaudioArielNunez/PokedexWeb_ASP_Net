@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
 using negocio;
 
 namespace Ejemplo_1
@@ -13,7 +14,10 @@ namespace Ejemplo_1
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            dgvPokemon.DataSource = negocio.listarInactivosConSp();
+            //dgvPokemon.DataSource = negocio.listarInactivosConSp();
+
+            Session.Add("PokemonLista", negocio.listarInactivosConSp());
+            dgvPokemon.DataSource = Session["PokemonLista"];
             dgvPokemon.DataBind();
         }
 
@@ -28,6 +32,14 @@ namespace Ejemplo_1
         {
             dgvPokemon.PageIndex = e.NewPageIndex;
             dgvPokemon.DataBind();
+        }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Pokemon> lista = (List<Pokemon>)Session["PokemonLista"];
+            List<Pokemon> listaFiltrada = lista.FindAll(x=>x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvPokemon.DataSource = listaFiltrada;
+            dgvPokemon.DataBind(); 
         }
     }
 }
