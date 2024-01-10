@@ -46,14 +46,32 @@ namespace Ejemplo_1
 
         protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
         {
-            filtroAvanzado = chkAvanzado.Checked;
-            if (filtroAvanzado)
+            //filtroAvanzado = chkAvanzado.Checked;
+            if (chkAvanzado.Checked)
             {
                 txtFiltro.Enabled = false;
             }
             else
             {
                 txtFiltro.Enabled = true;
+            }
+        }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();//para q no acumule los items
+
+            if(ddlCampo.SelectedItem.ToString() == "Número")
+            {
+                ddlCriterio.Items.Add("Igual a");
+                ddlCriterio.Items.Add("Mayor a");
+                ddlCriterio.Items.Add("Menor a");
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Contiene");
+                ddlCriterio.Items.Add("Comienza con");
+                ddlCriterio.Items.Add("Termina con");
             }
         }
     }

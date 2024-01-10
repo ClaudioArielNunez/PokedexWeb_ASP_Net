@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    <%if (filtroAvanzado) //es una propiedad
+    <%if (chkAvanzado.Checked) //es una propiedad
         {%>
     <div class="mb-4 row">
         <div class="col-3">
             <asp:Label Text="Campo" runat="server" />
-            <asp:DropDownList runat="server" ID="ddlCampo" CssClass="form-control">
+            <asp:DropDownList runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" ID="ddlCampo" CssClass="form-control">
                 <asp:ListItem Text="Nombre" />
                 <asp:ListItem Text="Tipo" />
                 <asp:ListItem Text="Número" />
