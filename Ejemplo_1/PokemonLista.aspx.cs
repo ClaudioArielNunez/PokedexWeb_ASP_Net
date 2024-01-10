@@ -74,5 +74,37 @@ namespace Ejemplo_1
                 ddlCriterio.Items.Add("Termina con");
             }
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PokemonNegocio negocio = new PokemonNegocio();
+                dgvPokemon.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
+                dgvPokemon.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+            }
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFiltroAvanzado.Text = "";
+
+                PokemonNegocio negocio = new PokemonNegocio();
+                dgvPokemon.DataSource = negocio.listarInactivosConSp();
+                dgvPokemon.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+            }
+        }
     }
 }

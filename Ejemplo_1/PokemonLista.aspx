@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <%if (chkAvanzado.Checked) //es una propiedad
+    <%if (chkAvanzado.Checked) //usamos el chequed para abrirlo
         {%>
     <div class="mb-4 row">
         <div class="col-3">
@@ -49,7 +49,8 @@
     <div class="row">
         <div class="col-3">
             <div class="mb-3">
-                <asp:Button ID="btnBuscar" CssClass="btn btn-primary" Text="Buscar" runat="server" />
+                <asp:Button ID="btnBuscar" OnClick="btnBuscar_Click" CssClass="btn btn-primary" Text="Buscar" runat="server" />
+                <asp:Button ID="btnLimpiar" OnClick="btnLimpiar_Click"  CssClass="btn btn-success" Text="Limpiar resultados" runat="server" />
             </div>
         </div>
     </div>
