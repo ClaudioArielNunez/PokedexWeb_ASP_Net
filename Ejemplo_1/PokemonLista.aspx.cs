@@ -11,6 +11,7 @@ namespace Ejemplo_1
 {
     public partial class PokemonLista : System.Web.UI.Page
     {
+        public bool filtroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -40,6 +41,11 @@ namespace Ejemplo_1
             List<Pokemon> listaFiltrada = lista.FindAll(x=>x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
             dgvPokemon.DataSource = listaFiltrada;
             dgvPokemon.DataBind(); 
+        }
+
+        protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
