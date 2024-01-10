@@ -14,6 +14,7 @@ namespace Ejemplo_1
         public bool filtroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            filtroAvanzado = false;
             PokemonNegocio negocio = new PokemonNegocio();
             //dgvPokemon.DataSource = negocio.listarInactivosConSp();
 
@@ -45,7 +46,15 @@ namespace Ejemplo_1
 
         protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
         {
-
+            filtroAvanzado = chkAvanzado.Checked;
+            if (filtroAvanzado)
+            {
+                txtFiltro.Enabled = false;
+            }
+            else
+            {
+                txtFiltro.Enabled = true;
+            }
         }
     }
 }
