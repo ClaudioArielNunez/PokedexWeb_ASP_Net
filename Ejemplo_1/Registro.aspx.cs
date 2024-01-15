@@ -23,9 +23,16 @@ namespace Ejemplo_1
             {
                 Trainee user = new Trainee();
                 TraineeNegocio negocio = new TraineeNegocio();
+                //instanciamos
+                EmailService emailService = new EmailService();
                 user.Email = txtEmail.Text;
                 user.Pass = txtPass.Text;
                 int id = negocio.insertarNuevo(user);
+
+                //Probando email
+                emailService.armarCorreo(user.Email, "Bienvenida Trainner", "Hola, te damos la bienvenida a la app");
+                emailService.enviarEmail();
+                Response.Redirect("Default.aspx", false);
 
             }
             catch (Exception ex)
