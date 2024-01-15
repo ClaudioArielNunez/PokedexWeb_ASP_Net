@@ -50,7 +50,7 @@
                         <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" CssClass="form-control" runat="server" />
                     </div>
                     <asp:Image ImageUrl="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg" runat="server"
-                        ID="imgPokemon" Width="60%" />
+                        ID="imgPokemon" Width="45%" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
