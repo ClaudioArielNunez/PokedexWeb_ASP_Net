@@ -16,10 +16,12 @@ namespace Ejemplo_1
         {
             //llamamos a la clase Estatica
             //volvemos a negar la condicion
-            if ( !(Seguridad.sesionActiva(Session["trainne"])))
+            /*
+            if ( !Seguridad.sesionActiva(Session["trainne"]))
             {
                 Response.Redirect("Login.aspx", false);
             }
+            */
 
             //Operador Ternario
             /*
