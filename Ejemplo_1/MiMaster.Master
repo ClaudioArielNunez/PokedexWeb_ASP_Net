@@ -34,12 +34,12 @@
                             <a class="nav-link" href="FormularioPokemon.aspx">Favoritos</a>
                         </li>
                         <li class=" nav-item">
-                            <a class="nav-link" href="FormularioPokemon.aspx">Mi Perfil</a>
+                            <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
                         </li>
                     </ul>
                 </div>
                 <div class="d-flex">
-                    <a class=" me-2 btn btn-success" href="Registro.aspx">Login</a>
+                    <a class=" me-2 btn btn-success" href="Login.aspx">Login</a>
                     <a href="Registro.aspx" class=" m-auto btn btn-outline-primary">Registrarse</a>
                     <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
                 </div>
