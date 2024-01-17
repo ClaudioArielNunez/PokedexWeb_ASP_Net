@@ -49,7 +49,8 @@
                              <asp:Button Text="Salir" OnClick="btnSalir_Click" ID="btnSalir" CssClass="m-auto me-2 btn btn-primary" runat="server" />
 
                         <%} %>
-                    <asp:Image src="https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
+                    <asp:Image ImageUrl="https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" 
+                                ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
                 </div>
             </div>
         </nav>
