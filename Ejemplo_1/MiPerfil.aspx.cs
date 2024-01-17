@@ -38,6 +38,7 @@ namespace Ejemplo_1
         {
             try
             {
+                //PARA ESCRIBIR:
                 //guardamos en ruta la ruta de acceso fisica q corresponde a la ruta virtual
                 string ruta = Server.MapPath("./Images/");
 
@@ -50,6 +51,8 @@ namespace Ejemplo_1
                 //Guardamos imagen SIN la ruta            
                 user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
 
+                user.Nombre = txtNombre.Text;
+
                 //necesitamos  llamar al objeto TrainneNegocio y llamamos/creamos metodo actualizar
                 TraineeNegocio negocio = new TraineeNegocio();
                 negocio.actualizar(user);
@@ -58,6 +61,7 @@ namespace Ejemplo_1
                 //Master.FindControl("imgAvatar");
                 //guardamos en un objeto Image
                 Image img = (Image)Master.FindControl("imgAvatar");
+                //PARA LEER:
                 //Necesito sumarle la ruta virtual con la virgulilla + la carpeta
                 img.ImageUrl = "~/Images/" + user.ImagenPerfil;
 

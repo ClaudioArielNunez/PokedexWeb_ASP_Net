@@ -14,7 +14,8 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE USERS SET imagenPerfil = @imagen WHERE id = @id");
+                datos.setearConsulta("UPDATE USERS SET nombre = @nombre, imagenPerfil = @imagen WHERE id = @id");
+                
                 datos.setearParametro("@imagen", user.ImagenPerfil);
                 datos.setearParametro("@id", user.Id);
                 datos.ejecutarAccion();
@@ -55,16 +56,23 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT id, email, pass, admin FROM USERS WHERE email = @email AND pass = @pass");
+                datos.setearConsulta("SELECT id, email, pass, admin, nombre, apellido, imagenPerfil FROM USERS WHERE email = @email AND pass = @pass");
                 datos.setearParametro("@email", trainne.Email);
-                datos.setearParametro("@pass", trainne.Pass);
+                datos.setearParametro("@pass", trainne.Pass);                
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read()) //si lo encontro en la BD  
                 {
                     //Cargamos id y si es o no Admin
-                    trainne.Id = (int)datos.Lector["id"];
+                    trainne.Id = (int)datos.Lector["id"];                    
                     trainne.Admin = (bool)datos.Lector["admin"];
+                    
+                    //Validamos que la imagen no sea Null
+                    if ( !(datos.Lector["imagenPerfil"] is DBNull))
+                    {
+                        trainne.ImagenPerfil = (string)datos.Lector["imagenPerfil"];
+                    }
+                    
                     return true;
 
                 }
