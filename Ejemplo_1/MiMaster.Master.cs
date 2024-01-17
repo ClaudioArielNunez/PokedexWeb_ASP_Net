@@ -13,8 +13,8 @@ namespace Ejemplo_1
         protected void Page_Load(object sender, EventArgs e)
         {
             //llamamos a la clase Estatica, volvemos a negar la condicion
-            
-            if( !(Page is Login))
+            //Con esto puede ingresar a las paginas basicas
+            if( !(Page is Login || Page is Default || Page is Registro))
             {
                 if (!Seguridad.sesionActiva(Session["trainne"]))
                 {
@@ -22,6 +22,13 @@ namespace Ejemplo_1
                 }
             }
             
+        }
+
+        
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Login.aspx");
         }
     }
 }

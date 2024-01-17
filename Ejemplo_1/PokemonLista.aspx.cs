@@ -14,13 +14,25 @@ namespace Ejemplo_1
         public bool filtroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            filtroAvanzado = false;
-            PokemonNegocio negocio = new PokemonNegocio();
-            //dgvPokemon.DataSource = negocio.listarInactivosConSp();
+            //si es Admin
+            if (!Seguridad.esAdmin(Session["trainne"]))
+            {
+                Session.Add("error", "Se requiere permisos de Admin para entrar a esta pantalla");
+                Response.Redirect("Error.aspx", false);
+            }
 
-            Session.Add("PokemonLista", negocio.listarInactivosConSp());
-            dgvPokemon.DataSource = Session["PokemonLista"];
-            dgvPokemon.DataBind();
+
+            filtroAvanzado = false;
+            if (!IsPostBack)
+            {
+                PokemonNegocio negocio = new PokemonNegocio();
+                //dgvPokemon.DataSource = negocio.listarInactivosConSp();
+
+                Session.Add("PokemonLista", negocio.listarInactivosConSp());
+                dgvPokemon.DataSource = Session["PokemonLista"];
+                dgvPokemon.DataBind();
+            }
+            
         }
 
         protected void dgvPokemon_SelectedIndexChanged(object sender, EventArgs e)

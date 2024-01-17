@@ -28,6 +28,9 @@ namespace Ejemplo_1
                 user.Email = txtEmail.Text;
                 user.Pass = txtPass.Text;
                 int id = negocio.insertarNuevo(user);
+                user.Id = id;
+                Session.Add("trainne", user); //Esto nos deja la Session abierta cuando nos registramos
+
 
                 //Probando email
                 emailService.armarCorreo(user.Email, "Bienvenida Trainner", "Hola, te damos la bienvenida a la app");

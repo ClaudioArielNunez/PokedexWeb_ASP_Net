@@ -39,9 +39,17 @@
                     </ul>
                 </div>
                 <div class="d-flex">
-                    <a class=" me-2 btn btn-success" href="Login.aspx">Login</a>
-                    <a href="Registro.aspx" class=" m-auto btn btn-outline-primary">Registrarse</a>
-                    <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
+                    <%if (!negocio.Seguridad.sesionActiva(Session["trainne"]))
+                        {%>
+                            <a class="m-auto me-2 btn btn-success" href="Login.aspx">Login</a>                    
+                            <a href="Registro.aspx" class=" m-auto me-2 btn btn-outline-primary">Registrarse</a>
+                        <%}
+                      else
+                        { %>
+                             <asp:Button Text="Salir" OnClick="btnSalir_Click" ID="btnSalir" CssClass="m-auto me-2 btn btn-primary" runat="server" />
+
+                        <%} %>
+                    <asp:Image src="https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
                 </div>
             </div>
         </nav>

@@ -22,5 +22,13 @@ namespace negocio
                 return false;
             }
         }
+
+        public static bool esAdmin(object user)
+        {
+            Trainee trainee = user != null ? (Trainee)user : null;
+
+            //Validamos no sea null
+            return trainee != null ? trainee.Admin : false;
+        }
     }
 }
