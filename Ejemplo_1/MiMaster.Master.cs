@@ -29,7 +29,7 @@ namespace Ejemplo_1
                     
                     if(!string.IsNullOrEmpty(user.ImagenPerfil))
                     {
-                        imgAvatar.ImageUrl= "~/Images/" + user.ImagenPerfil;
+                        imgAvatar.ImageUrl= "~/Images/" + user.ImagenPerfil ;
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace Ejemplo_1
             {
                 if( ((Trainee)Session["trainne"]).ImagenPerfil != null)
                 {
-                    imgAvatar.ImageUrl = "~/Images/" + (((Trainee)Session["trainne"]).ImagenPerfil);
+                    imgAvatar.ImageUrl = "~/Images/" + (((Trainee)Session["trainne"]).ImagenPerfil) + "?v=" + DateTime.Now.Ticks.ToString();
                 }
                 else
                 {

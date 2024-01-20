@@ -29,7 +29,7 @@ namespace Ejemplo_1
                         txtFecha.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
                         if (!string.IsNullOrEmpty(user.ImagenPerfil))
                         {
-                            imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
+                            imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString(); 
                         }
                     }
                 }
