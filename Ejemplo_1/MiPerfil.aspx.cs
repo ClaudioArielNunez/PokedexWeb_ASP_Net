@@ -14,62 +14,61 @@ namespace Ejemplo_1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //llamamos a la clase Estatica
-            //volvemos a negar la condicion
-            /*
-            if ( !Seguridad.sesionActiva(Session["trainne"]))
+
+            try
             {
-                Response.Redirect("Login.aspx", false);
+                if (!IsPostBack)
+                {
+                    if (Seguridad.sesionActiva(Session["trainne"]))
+                    {
+                        Trainee user = (Trainee)Session["trainne"];
+                        txtEmail.Text = user.Email;
+                        txtEmail.ReadOnly = true;
+                        txtNombre.Text = user.Nombre;
+                        txtApellido.Text = user.Apellido;
+                        txtFecha.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
+                        if (!string.IsNullOrEmpty(user.ImagenPerfil))
+                        {
+                            imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
+                        }
+                    }
+                }
+
             }
-            */
-
-            //Operador Ternario
-            /*
-            Trainee trainee = Session["trainne"] != null ? (Trainee)Session["trainne"] : null;
-
-            if(!(trainee != null && trainee.Id != 0)) 
+            catch (Exception ex)
             {
-                Response.Redirect("Login.aspx", false); 
-            } 
-            */
+
+                Session.Add("error", ex.ToString());
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                //PARA ESCRIBIR:
-                //guardamos en ruta la ruta de acceso fisica q corresponde a la ruta virtual
-                string ruta = Server.MapPath("./Images/");
-
-                //llamamos a Session para conseguir el id
                 Trainee user = (Trainee)Session["trainne"];
+                TraineeNegocio negocio = new TraineeNegocio();
 
-                //obtenemos el archivo cargado
-                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg" );
+                //Escribir imagen solo si se cargo algo
+                if(txtImagen.PostedFile.FileName != "")
+                {
+                    string ruta = Server.MapPath("./Images/");
+                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+                    user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
+                }               
 
-                //Guardamos imagen SIN la ruta            
-                user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
 
                 user.Nombre = txtNombre.Text;
+                user.Apellido = txtApellido.Text;
+                user.FechaNacimiento = DateTime.Parse(txtFecha.Text);
 
-                //necesitamos  llamar al objeto TrainneNegocio y llamamos/creamos metodo actualizar
-                TraineeNegocio negocio = new TraineeNegocio();
                 negocio.actualizar(user);
 
-                //Actualizar el avatar -vamos a master,ubicamos el control
-                //Master.FindControl("imgAvatar");
-                //guardamos en un objeto Image
-                Image img = (Image)Master.FindControl("imgAvatar");
-                //PARA LEER:
-                //Necesito sumarle la ruta virtual con la virgulilla + la carpeta
-                img.ImageUrl = "~/Images/" + user.ImagenPerfil;
-
-
+                Image imagen = (Image)Master.FindControl("imgAvatar");
+                imagen.ImageUrl = "~/Images/" + user.ImagenPerfil;
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.ToString());
             }
         }

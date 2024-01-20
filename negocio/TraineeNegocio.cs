@@ -14,10 +14,13 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE USERS SET nombre = @nombre, imagenPerfil = @imagen WHERE id = @id");
-                
+                datos.setearConsulta("UPDATE USERS SET fechaNacimiento = @fecha, apellido = @apellido, nombre = @nombre, imagenPerfil = @imagen WHERE id = @id");
+                //operador ternario para evitar nulos
                 datos.setearParametro("@imagen", user.ImagenPerfil);
                 datos.setearParametro("@id", user.Id);
+                datos.setearParametro("@nombre", user.Nombre);
+                datos.setearParametro("@apellido", user.Apellido);
+                datos.setearParametro("@fecha", user.FechaNacimiento);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -56,7 +59,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT id, email, pass, admin, nombre, apellido, imagenPerfil FROM USERS WHERE email = @email AND pass = @pass");
+                datos.setearConsulta("SELECT id, email, pass, admin, nombre, apellido, imagenPerfil, fechaNacimiento FROM USERS WHERE email = @email AND pass = @pass");
                 datos.setearParametro("@email", trainne.Email);
                 datos.setearParametro("@pass", trainne.Pass);                
                 datos.ejecutarLectura();
@@ -67,10 +70,22 @@ namespace negocio
                     trainne.Id = (int)datos.Lector["id"];                    
                     trainne.Admin = (bool)datos.Lector["admin"];
                     
-                    //Validamos que la imagen no sea Null
+                    //Validamos que estos datos no sean Null
                     if ( !(datos.Lector["imagenPerfil"] is DBNull))
                     {
                         trainne.ImagenPerfil = (string)datos.Lector["imagenPerfil"];
+                    }
+                    if ( !(datos.Lector["nombre"] is DBNull))
+                    {
+                        trainne.Nombre = (string)datos.Lector["nombre"];
+                    }
+                    if (!(datos.Lector["apellido"] is DBNull) )
+                    {
+                        trainne.Apellido = datos.Lector["apellido"].ToString();
+                    }
+                    if (!(datos.Lector["fechaNacimiento"] is DBNull))
+                    {
+                        trainne.FechaNacimiento = DateTime.Parse(datos.Lector["fechaNacimiento"].ToString());
                     }
                     
                     return true;

@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="txtFecha" class="form-label">Fecha de Nacimiento</label>
-                <asp:TextBox ID="txtFecha" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtFecha" TextMode="Date" CssClass="form-control" runat="server" />
             </div>
         </div>
 

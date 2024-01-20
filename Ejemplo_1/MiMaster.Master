@@ -41,15 +41,15 @@
                 <div class="d-flex">
                     <%if (!negocio.Seguridad.sesionActiva(Session["trainne"]))
                         {%>
-                            <a class="m-auto me-2 btn btn-success" href="Login.aspx">Login</a>                    
-                            <a href="Registro.aspx" class=" m-auto me-2 btn btn-outline-primary">Registrarse</a>
-                        <%}
-                      else
+                    <a class="m-auto me-2 btn btn-success" href="Login.aspx">Login</a>
+                    <a href="Registro.aspx" class=" m-auto me-2 btn btn-outline-primary">Registrarse</a>
+                    <%}
+                        else
                         { %>
-                             <asp:Button Text="Salir" OnClick="btnSalir_Click" ID="btnSalir" CssClass="m-auto me-2 btn btn-primary" runat="server" />
-
-                        <%} %>
-                    <asp:Image  ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
+                    <asp:Button Text="Salir" OnClick="btnSalir_Click" ID="btnSalir" CssClass="m-auto me-2 btn btn-primary" runat="server" />
+                    
+                    <%} %>
+                    <asp:Image ID="imgAvatar" Style="height: 40px; width: 40px; border-radius: 50%;" runat="server" />
                 </div>
             </div>
         </nav>
