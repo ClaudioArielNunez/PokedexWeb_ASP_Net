@@ -15,8 +15,10 @@ namespace negocio
             try
             {
                 datos.setearConsulta("UPDATE USERS SET fechaNacimiento = @fecha, apellido = @apellido, nombre = @nombre, imagenPerfil = @imagen WHERE id = @id");
-                //operador ternario para evitar nulos
-                datos.setearParametro("@imagen", user.ImagenPerfil);
+                //operador ternario para evitar nulos, en este caso se castea DBNull a su forma nativa para que lo acepte
+                datos.setearParametro("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : (object)DBNull.Value);
+                //otra forma de poner el DBNull
+                //datos.setearParametro("@imagen", (object)user.ImagenPerfil ?? DBNull.Value);
                 datos.setearParametro("@id", user.Id);
                 datos.setearParametro("@nombre", user.Nombre);
                 datos.setearParametro("@apellido", user.Apellido);
