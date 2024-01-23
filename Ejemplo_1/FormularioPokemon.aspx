@@ -18,6 +18,7 @@
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre:</label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
+                
             </div>
             <div class="mb-3">
                 <label for="ddlTipo" class="form-label">Tipo:</label>

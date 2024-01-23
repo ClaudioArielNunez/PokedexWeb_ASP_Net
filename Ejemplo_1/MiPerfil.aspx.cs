@@ -47,6 +47,13 @@ namespace Ejemplo_1
         {
             try
             {
+                //En caso de no ser valida corta la ejecucion
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
+
                 Trainee user = (Trainee)Session["trainne"];
                 TraineeNegocio negocio = new TraineeNegocio();
 

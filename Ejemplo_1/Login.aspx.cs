@@ -28,7 +28,7 @@ namespace Ejemplo_1
                 //    Response.Redirect("Error.aspx", true);
                 //}
 
-                if(Validacion.EsTextoVacio(txtEmail) || (Validacion.EsTextoVacio(txtPass)))
+                if(Validacion.EsTextoVacio(txtEmail) || Validacion.EsTextoVacio(txtPass) )
                 {
                     Session.Add("error", "Debes completar ambos campos....");
                     Response.Redirect("Error.aspx");
