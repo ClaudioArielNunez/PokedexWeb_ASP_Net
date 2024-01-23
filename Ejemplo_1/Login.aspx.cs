@@ -22,6 +22,17 @@ namespace Ejemplo_1
             Trainee trainee = new Trainee();            
             try
             {
+                //if(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text))
+                //{
+                //    Session.Add("error", "Debes completar ambos campos");
+                //    Response.Redirect("Error.aspx", true);
+                //}
+
+                if(Validacion.EsTextoVacio(txtEmail) || (Validacion.EsTextoVacio(txtPass)))
+                {
+                    Session.Add("error", "Debes completar ambos campos....");
+                    Response.Redirect("Error.aspx");
+                }
                 trainee.Email = txtEmail.Text;
                 trainee.Pass = txtPass.Text;
                 
@@ -34,9 +45,10 @@ namespace Ejemplo_1
                 else
                 {
                     Session.Add("error", "User o Pass incorrectos");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx", false);
                 }
             }
+            catch (System.Threading.ThreadAbortException ex) { }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());

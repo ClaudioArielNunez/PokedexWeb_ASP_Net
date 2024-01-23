@@ -42,6 +42,7 @@ namespace Ejemplo_1
             {
 
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
             }
         }
     }

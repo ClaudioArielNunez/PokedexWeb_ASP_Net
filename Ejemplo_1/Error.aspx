@@ -3,5 +3,5 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label Text="" ID="lblMensajeError" runat="server" />
-    <asp:Image ImageUrl="https://i.blogs.es/3951b6/error404/1366_2000.jpg" runat="server" />                
+    <asp:Image ImageUrl="https://www.shutterstock.com/image-vector/page-not-found-error-404-600w-479042983.jpg" runat="server" />                
 </asp:Content>

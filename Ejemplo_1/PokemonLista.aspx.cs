@@ -98,7 +98,7 @@ namespace Ejemplo_1
             catch (Exception ex)
             {
                 Session.Add("Error", ex);
-                throw;
+                Response.Redirect("Error.aspx");
             }
         }
 

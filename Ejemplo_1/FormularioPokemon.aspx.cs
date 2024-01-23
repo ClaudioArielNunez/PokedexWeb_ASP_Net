@@ -72,7 +72,8 @@ namespace Ejemplo_1
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex); //Agregamos a Session, para usarlo mas adelante                
+                Session.Add("error", ex); //Agregamos a Session, para usarlo mas adelante
+                Response.Redirect("Error.aspx");
             }
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
