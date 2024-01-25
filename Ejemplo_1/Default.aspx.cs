@@ -11,6 +11,7 @@ namespace Ejemplo_1
 {
     public partial class Default : System.Web.UI.Page
     {
+        public bool verModal = false;
         public List<Pokemon> ListaPokemon { get; set; } //creamos una propiedad de tipo lista
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,6 +19,11 @@ namespace Ejemplo_1
             ListaPokemon = negocio.listarConSP();
 
 
+        }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            verModal = true;
         }
     }
 }

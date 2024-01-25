@@ -19,11 +19,18 @@
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
+                <%--validacion con RequiredFieldValidator--%>
                 <asp:RequiredFieldValidator cssClass="validacion" ErrorMessage="El nombre es requerido" ControlToValidate="txtNombre" runat="server" />
             </div>
             <div class="mb-3">
                 <label for="txtApellido" cssclass="form-label">Apellido</label>
                 <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server" />
+                <%--validacion de rangos--%>
+<%--                <asp:RangeValidator ErrorMessage="Fuera de rango" Type="Integer" MinimumValue="1" MaximumValue="20" ControlToValidate="txtApellido" runat="server" />--%>
+                <%--validacion de expresiones regulares--%>
+<%--                <asp:RegularExpressionValidator ErrorMessage="Solo ingrese números" ValidationExpression="^[0-9]+$" ControlToValidate="txtApellido" cssClass="validacion" runat="server" />--%>
+                 <%--validacion de expresiones regulares con email--%>
+<%--                <asp:RegularExpressionValidator ErrorMessage="Ingrese email válido" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" ControlToValidate="txtApellido" cssClass="validacion" runat="server" />--%>
             </div>
             <div class="mb-3">
                 <label for="txtFecha" class="form-label">Fecha de Nacimiento</label>
