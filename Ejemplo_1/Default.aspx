@@ -13,7 +13,7 @@
             {%>
         <div class="col">
             <div class="card">
-                <img src="<%:poke.UrlImagen %>" class="card-img-top" alt="<%:poke.Nombre %>">
+                <img src="<%:poke.UrlImagen %>" class="card-img-top" height="220px" alt="<%:poke.Nombre %>">
                 <div class="card-body">
                     <h5 class="card-title"><%:poke.Nombre %></h5>
                     <p class="card-text"><%:poke.Descripcion %></p>

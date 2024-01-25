@@ -100,6 +100,10 @@ namespace negocio
                     {
                         aux.UrlImagen = (string)datos.Lector["UrlImagen"];
                     }
+                    else
+                    {
+                        aux.UrlImagen = "https://cdn.dribbble.com/users/4040675/screenshots/10545158/media/85a3329e4202059593616d3b42f16e8d.png?resize=400x300&vertical=center";
+                    }
                     aux.Tipo = new Elemento();
                     aux.Tipo.Id = (int)datos.Lector["IdTipo"];
                     aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
